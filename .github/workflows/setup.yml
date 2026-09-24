@@ -1,0 +1,43 @@
+name: Setup (Threads token + Telegram)
+
+# Запускается вручную один раз после добавления секретов.
+# 1) если задан THREADS_APP_SECRET — меняет токен Threads на долгоживущий (60 дней)
+# 2) проверяет доступ к аккаунту Threads
+# 3) если задан TG_BOT_TOKEN — находит chat_id (нужно заранее нажать /start у бота) и шлёт сообщение
+on:
+  workflow_dispatch:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GH_PAT }}
+      TG: ${{ secrets.TG_BOT_TOKEN }}
+      TG_USERNAME: ${{ vars.TG_USERNAME }}
+    steps:
+      - name: Exchange Threads token
+        env:
+          TOKEN: ${{ secrets.THREADS_TOKEN }}
+          SECRET: ${{ secrets.THREADS_APP_SECRET }}
+        run: |
+          if [ -z "$TOKEN" ]; then echo "::error::Нет секрета THREADS_TOKEN"; exit 1; fi
+          if [ -n "$SECRET" ] && [ -n "$GH_TOKEN" ]; then
+            R=$(curl -s "https://graph.threads.net/access_token?grant_type=th_exchange_token&client_secret=$SECRET&access_token=$TOKEN")
+            NEW=$(echo "$R" | jq -r '.access_token // empty')
+            if [ -n "$NEW" ]; then echo "::add-mask::$NEW"; gh secret set THREADS_TOKEN --body "$NEW" --repo "$GITHUB_REPOSITORY"; echo "TOKEN=$NEW" >> $GITHUB_ENV; echo "Токен обменян на долгоживущий (60 дней)";
+            else echo "Обмен не нужен или не удался: $(echo "$R" | jq -c '.error.message // .')"; echo "TOKEN=$TOKEN" >> $GITHUB_ENV; fi
+          else echo "TOKEN=$TOKEN" >> $GITHUB_ENV; fi
+      - name: Check Threads
+        run: |
+          ME=$(curl -s "https://graph.threads.net/v1.0/me?fields=id,username&access_token=$TOKEN")
+          NAME=$(echo "$ME" | jq -r '.username // empty')
+          if [ -z "$NAME" ]; then echo "::error::Токен Threads не работает: $(echo "$ME" | jq -r '.error.message')"; exit 1; fi
+          echo "Threads: @$NAME"; echo "NAME=$NAME" >> $GITHUB_ENV
+      - name: Telegram (optional)
+        run: |
+          if [ -z "$TG" ]; then echo "Telegram не настроен — пропускаю"; exit 0; fi
+          U=$(curl -s "https://api.telegram.org/bot$TG/getUpdates")
+          CHAT=$(echo "$U" | jq -r --arg u "${TG_USERNAME,,}" '[.result[] | (.message // .my_chat_member) | select(.chat.type=="private") | select((.from.username // "" | ascii_downcase) == $u or $u == "") | .chat.id] | last // empty')
+          if [ -z "$CHAT" ]; then echo "::warning::Не нашёл чат. Нажмите /start у бота и запустите Setup снова."; exit 0; fi
+          gh secret set TG_CHAT_ID --body "$CHAT" --repo "$GITHUB_REPOSITORY"
+          curl -s "https://api.telegram.org/bot$TG/sendMessage" --data-urlencode "chat_id=$CHAT" --data-urlencode "text=🤖 Бот подключён. Threads: @$NAME. Автовыкладка JELAI готова." > /dev/null
