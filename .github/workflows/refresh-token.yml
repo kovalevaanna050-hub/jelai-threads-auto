@@ -1,0 +1,29 @@
+name: Refresh Threads token
+
+# Токен Threads живёт 60 дней. Раз в неделю продлеваем его и сохраняем обратно в секреты.
+on:
+  schedule:
+    - cron: "0 3 * * 1"
+  workflow_dispatch:
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Refresh
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+          TOKEN: ${{ secrets.THREADS_TOKEN }}
+          TG: ${{ secrets.TG_BOT_TOKEN }}
+          CHAT: ${{ secrets.TG_CHAT_ID }}
+        run: |
+          R=$(curl -s "https://graph.threads.net/refresh_access_token?grant_type=th_refresh_token&access_token=$TOKEN")
+          NEW=$(echo "$R" | jq -r '.access_token // empty')
+          if [ -z "$NEW" ]; then
+            MSG="⚠️ Не удалось продлить токен Threads: $(echo "$R" | jq -r '.error.message // .')"
+            curl -s "https://api.telegram.org/bot$TG/sendMessage" --data-urlencode "chat_id=$CHAT" --data-urlencode "text=$MSG" > /dev/null
+            exit 1
+          fi
+          echo "::add-mask::$NEW"
+          gh secret set THREADS_TOKEN --body "$NEW" --repo "$GITHUB_REPOSITORY"
+          echo "Токен продлён на $(( $(echo "$R" | jq -r .expires_in) / 86400 )) дней"
