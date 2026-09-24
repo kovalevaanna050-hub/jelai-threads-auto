@@ -1,0 +1,56 @@
+name: Post to Threads
+
+on:
+  schedule:
+    - cron: "40 0 * * *"   # 07:40 по Сайгону → первый пост в 08:00
+    - cron: "40 11 * * *"  # 18:40 по Сайгону → первый пост в 19:00
+  workflow_dispatch:
+    inputs:
+      slot:
+        description: "morning или evening"
+        required: true
+        default: morning
+      dry_run:
+        description: "Только проверка, без публикации"
+        type: boolean
+        default: true
+      count:
+        description: "Сколько постов"
+        required: false
+        default: "10"
+
+concurrency:
+  group: threads-post
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish
+        env:
+          THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          POST_COUNT: ${{ vars.POST_COUNT || '10' }}
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            if [ "${{ github.event.schedule }}" = "40 0 * * *" ]; then SLOT=morning; else SLOT=evening; fi
+            python post.py "$SLOT"
+          else
+            FLAGS="--no-wait --count ${{ inputs.count }}"
+            [ "${{ inputs.dry_run }}" = "true" ] && FLAGS="--dry-run --count ${{ inputs.count }}"
+            python post.py "${{ inputs.slot }}" $FLAGS
+          fi
+      - name: Save state and log
+        if: always()
+        run: |
+          git config user.name "threads-bot"
+          git config user.email "threads-bot@users.noreply.github.com"
+          git add state.json logs 2>/dev/null || true
+          git diff --cached --quiet || (git commit -m "post $(date -u +%F_%H%M)" && git pull --rebase && git push)
