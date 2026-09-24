@@ -1,0 +1,26 @@
+name: Fetch photos
+
+# Один раз: скачивает фото товаров из ваших постов через Threads API в папку photos/.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install pillow numpy
+      - name: Download photos
+        env:
+          THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
+        run: python fetch_photos.py
+      - name: Commit
+        if: always()
+        run: |
+          git config user.name "threads-bot"
+          git config user.email "threads-bot@users.noreply.github.com"
+          git add photos || true
+          git diff --cached --quiet || (git commit -m "add photos" && git push)
