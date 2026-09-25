@@ -1,0 +1,21 @@
+name: Daily views report
+
+# Раз в день утром, до утренней публикации, шлёт в Telegram сводку
+# по вчерашним постам: сколько постов - сколько суммарных просмотров.
+on:
+  schedule:
+    - cron: "50 0 * * *"  # 07:50 Сайгон
+  workflow_dispatch:
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Report
+        env:
+          THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID || vars.TG_CHAT_ID }}
+        run: python report.py

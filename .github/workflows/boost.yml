@@ -1,0 +1,49 @@
+name: Boost top post
+
+# 5 раз в день находит пост за последние 24 часа с наибольшим числом
+# просмотров и публикует его копию ещё раз (то же фото, тот же текст).
+on:
+  schedule:
+    - cron: "30 2 * * *"   # 09:30 Сайгон
+    - cron: "0 5 * * *"    # 12:00
+    - cron: "30 7 * * *"   # 14:30
+    - cron: "0 10 * * *"   # 17:00
+    - cron: "0 14 * * *"   # 21:00
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Только проверка, без публикации"
+        type: boolean
+        default: false
+
+concurrency:
+  group: threads-post
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  boost:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Boost
+        env:
+          THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID || vars.TG_CHAT_ID }}
+        run: |
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            python boost.py --dry-run
+          else
+            python boost.py
+          fi
+      - name: Save state and log
+        if: always()
+        run: |
+          git config user.name "threads-bot"
+          git config user.email "threads-bot@users.noreply.github.com"
+          git add state.json logs 2>/dev/null || true
+          git diff --cached --quiet || (git commit -m "boost $(date -u +%F_%H%M)" && git pull --rebase && git push)
