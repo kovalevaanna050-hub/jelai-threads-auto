@@ -14,6 +14,10 @@
 - побеждает пост с максимумом просмотров, если товар всё ещё в наличии;
 - публикуем тот же товар, но другое фото и/или другую подпись из каталога
   (если вариантов нет — публикуем как есть), артикулы в ответе свежие.
+
+Подписи в catalog.json — список {"text": ..., "style": "soft"|"edgy"}
+(старый формат — просто строка — тоже поддерживается на случай, если
+catalog.json ещё не обновлён).
 """
 import datetime as dt
 import json
@@ -43,6 +47,14 @@ def load(name, default=None):
 def save(name, data):
     with open(name, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=1)
+
+
+def cap_text(c):
+    return c["text"] if isinstance(c, dict) else c
+
+
+def cap_style(c):
+    return c.get("style", "soft") if isinstance(c, dict) else "soft"
 
 
 def call(method, path, **params):
@@ -167,7 +179,8 @@ def reply_text(cat, key, wb, oz):
 
 def remix(cat, key, top):
     """Тот же товар, но по возможности другое фото и другая подпись, чтобы
-    Threads не расценил публикацию как дубликат и не срезал охват."""
+    Threads не расценил публикацию как дубликат и не срезал охват.
+    Возвращает (photos, text, style, is_exact)."""
     all_photos = [p for p in cat.get("photos", []) if p.get("product") == key]
     used = set(top.get("photos", []))
     alt_photos = [p for p in all_photos if p["file"] not in used]
@@ -183,10 +196,15 @@ def remix(cat, key, top):
         is_exact = True
 
     caps = cat["products"][key]["captions"] or [cat["products"][key]["name"]]
-    alt_caps = [c for c in caps if c != top["text"]]
-    text = random.choice(alt_caps) if alt_caps else top["text"]
+    alt_caps = [c for c in caps if cap_text(c) != top["text"]]
+    if alt_caps:
+        chosen_cap = random.choice(alt_caps)
+    else:
+        chosen_cap = top["text"]
+    text = cap_text(chosen_cap)
+    style = cap_style(chosen_cap) if alt_caps else top.get("style", "soft")
     is_exact = is_exact and (text == top["text"])
-    return photos, text, is_exact
+    return photos, text, style, is_exact
 
 
 # ---------- main ----------
@@ -230,11 +248,11 @@ def main():
     top_views, top = winner
     key = top["product"]
     reply = reply_text(cat, key, wb, oz)
-    photos, text, is_exact = remix(cat, key, top)
+    photos, text, style, is_exact = remix(cat, key, top)
 
     if DRY:
         tag = "точная копия (других фото/подписей нет)" if is_exact else "ремикс — другое фото/подпись"
-        print(f"[dry] буст {key} ({top_views} просм., {tag}) фото={photos}\n  {text}\n  ↳ {reply.replace(chr(10), ' | ')}")
+        print(f"[dry] буст {key} ({top_views} просм., {tag}, стиль={style}) фото={photos}\n  {text}\n  ↳ {reply.replace(chr(10), ' | ')}")
         return
 
     repo = os.environ.get("GITHUB_REPOSITORY", "OWNER/REPO")
@@ -243,7 +261,9 @@ def main():
     urls = [photo_url(f) for f in photos]
 
     try:
-        if len(urls) == 1:
+        if not urls:
+            cid = call("POST", "me/threads", media_type="TEXT", text=text)["id"]
+        elif len(urls) == 1:
             cid = call("POST", "me/threads", media_type="IMAGE", image_url=urls[0], text=text)["id"]
         else:
             kids = [call("POST", "me/threads", media_type="IMAGE", image_url=u, is_carousel_item="true")["id"] for u in urls]
@@ -261,7 +281,7 @@ def main():
     stamp = now().isoformat(timespec="seconds")
     recent.append({
         "ts": stamp, "media_id": media_id, "product": key,
-        "photos": photos, "text": text,
+        "photos": photos, "text": text, "style": style,
         "permalink": permalink, "is_boost": True, "boost_of_views": top_views,
     })
     keep_after = now() - dt.timedelta(hours=72)
