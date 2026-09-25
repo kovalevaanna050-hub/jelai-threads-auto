@@ -1,5 +1,7 @@
 """Буст: находит пост за последние 24 часа с наибольшим числом просмотров
-и публикует его копию (то же фото, тот же текст, свежий ответ с артикулами).
+и публикует РЕМИКС того же товара — другое фото и/или другую подпись
+(не точную копию: Threads в 2026 году занижает охват повторяющегося контента,
+поэтому побайтово идентичный повтор скорее вредит, чем помогает).
 
 Запуск: python boost.py [--dry-run]
 Секреты (env): THREADS_TOKEN, TG_BOT_TOKEN, TG_CHAT_ID
@@ -10,12 +12,13 @@
 - у каждого спрашиваем просмотры через Threads Insights API
   (нужно право приложения threads_manage_insights);
 - побеждает пост с максимумом просмотров, если товар всё ещё в наличии;
-- публикуем точную копию: то же фото/карусель, тот же текст,
-  но артикулы в ответе берём свежие (наличие могло измениться).
+- публикуем тот же товар, но другое фото и/или другую подпись из каталога
+  (если вариантов нет — публикуем как есть), артикулы в ответе свежие.
 """
 import datetime as dt
 import json
 import os
+import random
 import sys
 import time
 import urllib.error
@@ -162,6 +165,30 @@ def reply_text(cat, key, wb, oz):
     return "\n".join(lines)
 
 
+def remix(cat, key, top):
+    """Тот же товар, но по возможности другое фото и другая подпись, чтобы
+    Threads не расценил публикацию как дубликат и не срезал охват."""
+    all_photos = [p for p in cat.get("photos", []) if p.get("product") == key]
+    used = set(top.get("photos", []))
+    alt_photos = [p for p in all_photos if p["file"] not in used]
+    if alt_photos:
+        chosen = [random.choice(alt_photos)]
+        rest = [p for p in all_photos if p["file"] != chosen[0]["file"]]
+        if rest and random.random() < 0.5:
+            chosen.append(random.choice(rest))
+        photos = [p["file"] for p in chosen]
+        is_exact = False
+    else:
+        photos = top["photos"]
+        is_exact = True
+
+    caps = cat["products"][key]["captions"] or [cat["products"][key]["name"]]
+    alt_caps = [c for c in caps if c != top["text"]]
+    text = random.choice(alt_caps) if alt_caps else top["text"]
+    is_exact = is_exact and (text == top["text"])
+    return photos, text, is_exact
+
+
 # ---------- main ----------
 
 def main():
@@ -203,46 +230,49 @@ def main():
     top_views, top = winner
     key = top["product"]
     reply = reply_text(cat, key, wb, oz)
+    photos, text, is_exact = remix(cat, key, top)
 
     if DRY:
-        print(f"[dry] буст {key} ({top_views} просм.) фото={top['photos']}\n  {top['text']}\n  ↳ {reply.replace(chr(10), ' | ')}")
+        tag = "точная копия (других фото/подписей нет)" if is_exact else "ремикс — другое фото/подпись"
+        print(f"[dry] буст {key} ({top_views} просм., {tag}) фото={photos}\n  {text}\n  ↳ {reply.replace(chr(10), ' | ')}")
         return
 
     repo = os.environ.get("GITHUB_REPOSITORY", "OWNER/REPO")
     branch = os.environ.get("GITHUB_REF_NAME", "main")
     photo_url = lambda f: f"https://raw.githubusercontent.com/{repo}/{branch}/{urllib.parse.quote(f)}"
-    urls = [photo_url(f) for f in top["photos"]]
+    urls = [photo_url(f) for f in photos]
 
     try:
         if len(urls) == 1:
-            cid = call("POST", "me/threads", media_type="IMAGE", image_url=urls[0], text=top["text"])["id"]
+            cid = call("POST", "me/threads", media_type="IMAGE", image_url=urls[0], text=text)["id"]
         else:
             kids = [call("POST", "me/threads", media_type="IMAGE", image_url=u, is_carousel_item="true")["id"] for u in urls]
             for k in kids:
                 wait_ready(k)
-            cid = call("POST", "me/threads", media_type="CAROUSEL", children=",".join(kids), text=top["text"])["id"]
+            cid = call("POST", "me/threads", media_type="CAROUSEL", children=",".join(kids), text=text)["id"]
         media_id = publish(cid)
         rid = call("POST", "me/threads", media_type="TEXT", text=reply, reply_to_id=media_id)["id"]
         publish(rid)
         permalink = call("GET", media_id, fields="permalink").get("permalink", media_id)
     except Exception as e:
-        telegram(f"⚠️ Не удалось продублировать топ-пост ({key}): {str(e)[:300]}")
+        telegram(f"⚠️ Не удалось опубликовать буст ({key}): {str(e)[:300]}")
         raise
 
     stamp = now().isoformat(timespec="seconds")
     recent.append({
         "ts": stamp, "media_id": media_id, "product": key,
-        "photos": top["photos"], "text": top["text"],
+        "photos": photos, "text": text,
         "permalink": permalink, "is_boost": True, "boost_of_views": top_views,
     })
     keep_after = now() - dt.timedelta(hours=72)
     state["recent_posts"] = [p for p in recent if dt.datetime.fromisoformat(p["ts"]) > keep_after]
     save("state.json", state)
 
-    print(f"Буст: {key} ({top_views} просм. на оригинале) -> {permalink}")
+    tag = " (точная копия — вариантов фото/подписи не нашлось)" if is_exact else " (ремикс: другое фото/подпись)"
+    print(f"Буст: {key} ({top_views} просм. на оригинале){tag} -> {permalink}")
     os.makedirs("logs", exist_ok=True)
     with open(f"logs/{now():%Y-%m}.md", "a", encoding="utf-8") as f:
-        f.write(f"- 🔁 буст {key} (у оригинала {top_views} просм.): {permalink}\n")
+        f.write(f"- 🔁 буст {key} (у оригинала {top_views} просм.){tag}: {permalink}\n")
 
 
 if __name__ == "__main__":
