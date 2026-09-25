@@ -1,11 +1,16 @@
 name: Daily views report
 
-# Раз в день утром, до утренней публикации, шлёт в Telegram сводку
-# по вчерашним постам: сколько постов - сколько суммарных просмотров.
 on:
   schedule:
     - cron: "50 0 * * *"  # 07:50 Сайгон
   workflow_dispatch:
+
+concurrency:
+  group: threads-post
+  cancel-in-progress: false
+
+permissions:
+  contents: write
 
 jobs:
   report:
@@ -19,3 +24,10 @@ jobs:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID || vars.TG_CHAT_ID }}
         run: python report.py
+      - name: Save state
+        if: always()
+        run: |
+          git config user.name "threads-bot"
+          git config user.email "threads-bot@users.noreply.github.com"
+          git add state.json 2>/dev/null || true
+          git diff --cached --quiet || (git commit -m "report $(date -u +%F_%H%M)" && git pull --rebase && git push)
