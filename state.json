@@ -11,7 +11,20 @@
   "P065": "2026-09-25T08:30:27+07:00",
   "P083": "2026-09-25T08:35:30+07:00",
   "P077": "2026-09-25T08:40:24+07:00",
-  "P029": "2026-09-25T08:45:35+07:00"
+  "P029": "2026-09-25T08:45:35+07:00",
+  "P081": "2026-09-25T19:00:31+07:00",
+  "P061": "2026-09-25T19:05:34+07:00",
+  "P062": "2026-09-25T19:05:34+07:00",
+  "P009": "2026-09-25T19:10:30+07:00",
+  "P070": "2026-09-25T19:15:35+07:00",
+  "P071": "2026-09-25T19:15:35+07:00",
+  "P052": "2026-09-25T19:20:43+07:00",
+  "P051": "2026-09-25T19:20:43+07:00",
+  "P082": "2026-09-25T19:30:32+07:00",
+  "P053": "2026-09-25T19:35:35+07:00",
+  "P054": "2026-09-25T19:40:34+07:00",
+  "P044": "2026-09-25T19:45:39+07:00",
+  "P043": "2026-09-25T19:45:39+07:00"
  },
  "caption_idx": {
   "gel_malina": 1,
@@ -24,7 +37,16 @@
   "mist_coco": 1,
   "mist_whitechoc": 1,
   "mist_marshmallow": 1,
-  "cond_lemon": 1
+  "cond_lemon": 1,
+  "mist_pistachio": 1,
+  "mist_choco": 1,
+  "cond_all": 1,
+  "mist_forest": 1,
+  "gloss": 1,
+  "mist_popcorn": 1,
+  "mist_blanche": 1,
+  "mist_blueberry": 1,
+  "cond_soap": 1
  },
  "product_last": {
   "gel_malina": "2026-09-25T00:28:06+07:00",
@@ -37,6 +59,120 @@
   "mist_coco": "2026-09-25T08:30:27+07:00",
   "mist_whitechoc": "2026-09-25T08:35:30+07:00",
   "mist_marshmallow": "2026-09-25T08:40:24+07:00",
-  "cond_lemon": "2026-09-25T08:45:35+07:00"
- }
+  "cond_lemon": "2026-09-25T08:45:35+07:00",
+  "mist_pistachio": "2026-09-25T19:00:31+07:00",
+  "mist_choco": "2026-09-25T19:05:34+07:00",
+  "cond_all": "2026-09-25T19:10:30+07:00",
+  "mist_forest": "2026-09-25T19:15:35+07:00",
+  "gloss": "2026-09-25T19:20:43+07:00",
+  "mist_popcorn": "2026-09-25T19:30:32+07:00",
+  "mist_blanche": "2026-09-25T19:35:35+07:00",
+  "mist_blueberry": "2026-09-25T19:40:34+07:00",
+  "cond_soap": "2026-09-25T19:45:39+07:00"
+ },
+ "recent_posts": [
+  {
+   "ts": "2026-09-25T19:00:31+07:00",
+   "media_id": "18068150525758577",
+   "product": "mist_pistachio",
+   "photos": [
+    "photos/P081_mist_pistachio.jpg"
+   ],
+   "text": "Мист с ароматом фисташкового мороженого 🍦💚",
+   "permalink": "https://www.threads.com/@jelai.anna/post/DdtaNyBEUKh",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-25T19:05:34+07:00",
+   "media_id": "17903784189574292",
+   "product": "mist_choco",
+   "photos": [
+    "photos/P061_mist_choco.jpg",
+    "photos/P062_mist_choco.jpg"
+   ],
+   "text": "ТРЕДС, я нашла мист с ароматом киндера 🍫",
+   "permalink": "https://www.threads.com/@jelai.anna/post/DdtazctkWYN",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-25T19:10:30+07:00",
+   "media_id": "18128983204751663",
+   "product": "cond_all",
+   "photos": [
+    "photos/P009_cond_all.jpg"
+   ],
+   "text": "ТРЕДС, самые вкусные кондиционеры для белья, которые я находила 🧺",
+   "permalink": "https://www.threads.com/@jelai.anna/post/DdtbXAHEaHc",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-25T19:15:35+07:00",
+   "media_id": "18003343184793362",
+   "product": "mist_forest",
+   "photos": [
+    "photos/P070_mist_forest.jpg",
+    "photos/P071_mist_forest.jpg"
+   ],
+   "text": "Мист с запахом леса после дождя 🌲",
+   "permalink": "https://www.threads.com/@jelai.anna/post/Ddtb8kekQiP",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-25T19:20:43+07:00",
+   "media_id": "17921154213431065",
+   "product": "gloss",
+   "photos": [
+    "photos/P052_gloss.jpg",
+    "photos/P051_gloss.jpg"
+   ],
+   "text": "Блеск, от которого губы выглядят сочнее без филлеров 💋",
+   "permalink": "https://www.threads.com/@jelai.anna/post/Ddtchv-kRGC",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-25T19:30:32+07:00",
+   "media_id": "17869770237641873",
+   "product": "mist_popcorn",
+   "photos": [
+    "photos/P082_mist_popcorn.jpg"
+   ],
+   "text": "Пахну карамельным попкорном из кинотеатра 🍿",
+   "permalink": "https://www.threads.com/@jelai.anna/post/DdtdpcvEShk",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-25T19:35:35+07:00",
+   "media_id": "18129972605502416",
+   "product": "mist_blanche",
+   "photos": [
+    "photos/P053_mist_blanche.jpg"
+   ],
+   "text": "Тот самый чистый белый аромат, только в мисте 🤍",
+   "permalink": "https://www.threads.com/@jelai.anna/post/DdteOEakQii",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-25T19:40:34+07:00",
+   "media_id": "17882396832652688",
+   "product": "mist_blueberry",
+   "photos": [
+    "photos/P054_mist_blueberry.jpg"
+   ],
+   "text": "Мист с ароматом черничного пирога 🫐🥧",
+   "permalink": "https://www.threads.com/@jelai.anna/post/DdteyrykaSa",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-25T19:45:39+07:00",
+   "media_id": "18422138212146480",
+   "product": "cond_soap",
+   "photos": [
+    "photos/P044_cond_soap.jpg",
+    "photos/P043_cond_soap.jpg"
+   ],
+   "text": "Запах белого мыла и чистой кожи — теперь на всех моих вещах 🫧",
+   "permalink": "https://www.threads.com/@jelai.anna/post/DdtfYKAkbug",
+   "is_boost": false
+  }
+ ]
 }
