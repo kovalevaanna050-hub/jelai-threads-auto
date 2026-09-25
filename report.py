@@ -1,5 +1,7 @@
 """Дневная сводка: сколько постов вышло вчера и сколько просмотров они набрали.
-Формат сообщения в Telegram: "кол-во постов - кол-во просмотров".
+Формат сообщения в Telegram: "кол-во постов - кол-во просмотров" + разбивка
+по стилю подписи (soft/edgy), которая копится в state.json/style_stats и
+используется post.py (choose_caption) для эпсилон-жадного выбора стиля.
 
 Запуск: python report.py
 Секреты (env): THREADS_TOKEN, TG_BOT_TOKEN, TG_CHAT_ID
@@ -25,6 +27,11 @@ def load(name, default=None):
             return json.load(f)
     except FileNotFoundError:
         return default
+
+
+def save(name, data):
+    with open(name, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=1)
 
 
 def call(method, path, **params):
@@ -80,6 +87,7 @@ def main():
         return
 
     total, ok, failed = 0, 0, 0
+    by_style = {}
     for p in posts:
         v = views(p["media_id"])
         if v is None:
@@ -87,12 +95,28 @@ def main():
         else:
             total += v
             ok += 1
+            style = p.get("style", "soft")
+            agg = by_style.setdefault(style, {"views": 0, "posts": 0})
+            agg["views"] += v
+            agg["posts"] += 1
         time.sleep(1)
+
+    # копим статистику по стилям в state.json — её читает post.py, чтобы решить,
+    # какой стиль подписи (soft/edgy) чаще брать
+    stats = state.setdefault("style_stats", {})
+    for style, agg in by_style.items():
+        s = stats.setdefault(style, {"views": 0, "posts": 0})
+        s["views"] += agg["views"]
+        s["posts"] += agg["posts"]
+    save("state.json", state)
 
     boosts = sum(1 for p in posts if p.get("is_boost"))
     pct = round(total / GOAL * 100)
     msg = f"📊 Сводка за {yday:%d.%m}: {len(posts)} - {total}"
     extra = [f"из них бустов: {boosts}", f"цель {GOAL:,} просмотров/день: {pct}%".replace(",", " ")]
+    if by_style:
+        breakdown = ", ".join(f"{s}: {a['views']} на {a['posts']} пост." for s, a in sorted(by_style.items()))
+        extra.append(f"по стилям вчера: {breakdown}")
     if failed:
         extra.append(f"⚠️ не удалось получить просмотры для {failed} из {len(posts)} (проверьте право threads_manage_insights)")
     msg += "\n" + "\n".join(extra)
