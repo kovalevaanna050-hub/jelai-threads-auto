@@ -15,7 +15,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_PAT }}
           TOKEN: ${{ secrets.THREADS_TOKEN }}
           TG: ${{ secrets.TG_BOT_TOKEN }}
-          CHAT: ${{ secrets.TG_CHAT_ID }}
+          CHAT: ${{ secrets.TG_CHAT_ID || vars.TG_CHAT_ID }}
         run: |
           R=$(curl -s "https://graph.threads.net/refresh_access_token?grant_type=th_refresh_token&access_token=$TOKEN")
           NEW=$(echo "$R" | jq -r '.access_token // empty')

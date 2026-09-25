@@ -39,5 +39,6 @@ jobs:
           U=$(curl -s "https://api.telegram.org/bot$TG/getUpdates")
           CHAT=$(echo "$U" | jq -r --arg u "${TG_USERNAME,,}" '[.result[] | (.message // .my_chat_member) | select(.chat.type=="private") | select((.from.username // "" | ascii_downcase) == $u or $u == "") | .chat.id] | last // empty')
           if [ -z "$CHAT" ]; then echo "::warning::Не нашёл чат. Нажмите /start у бота и запустите Setup снова."; exit 0; fi
-          gh secret set TG_CHAT_ID --body "$CHAT" --repo "$GITHUB_REPOSITORY"
-          curl -s "https://api.telegram.org/bot$TG/sendMessage" --data-urlencode "chat_id=$CHAT" --data-urlencode "text=🤖 Бот подключён. Threads: @$NAME. Автовыкладка JELAI готова." > /dev/null
+          echo "TG_CHAT_ID=$CHAT"
+          if [ -n "$GH_TOKEN" ]; then gh secret set TG_CHAT_ID --body "$CHAT" --repo "$GITHUB_REPOSITORY" || true; fi
+          curl -s "https://api.telegram.org/bot$TG/sendMessage" --data-urlencode "chat_id=$CHAT" --data-urlencode "text=🤖 Бот подключён. Threads: @$NAME. Сюда будут приходить отчёты о выкладке JELAI (утро и вечер)." | jq -c '{ok, description}'

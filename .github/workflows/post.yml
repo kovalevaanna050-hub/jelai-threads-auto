@@ -36,7 +36,7 @@ jobs:
         env:
           THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID || vars.TG_CHAT_ID }}
           POST_COUNT: ${{ vars.POST_COUNT || '10' }}
         run: |
           if [ "${{ github.event_name }}" = "schedule" ]; then
