@@ -191,7 +191,8 @@ def post_one(post, photo_url):
     media_id = publish(cid)
     rid = call("POST", "me/threads", media_type="TEXT", text=post["reply"], reply_to_id=media_id)["id"]
     publish(rid)
-    return call("GET", media_id, fields="permalink").get("permalink", media_id)
+    permalink = call("GET", media_id, fields="permalink").get("permalink", media_id)
+    return media_id, permalink
 
 
 def telegram(text):
@@ -230,13 +231,21 @@ def main():
         if delay > 0 and not NO_WAIT:
             time.sleep(delay)
         try:
-            links.append(post_one(post, photo_url))
-            print(f"ok #{i}: {links[-1]}")
+            media_id, permalink = post_one(post, photo_url)
+            links.append(permalink)
+            print(f"ok #{i}: {permalink}")
             stamp = now().isoformat(timespec="seconds")
             for ph in post["photos"]:
                 state["photo_last"][ph["id"]] = stamp
             state["product_last"][post["product"]] = stamp
             state["caption_idx"][post["product"]] = post["ci"] + 1
+            state.setdefault("recent_posts", []).append({
+                "ts": stamp, "media_id": media_id, "product": post["product"],
+                "photos": [ph["file"] for ph in post["photos"]], "text": post["text"],
+                "permalink": permalink, "is_boost": False,
+            })
+            keep_after = now() - dt.timedelta(hours=72)
+            state["recent_posts"] = [p for p in state["recent_posts"] if dt.datetime.fromisoformat(p["ts"]) > keep_after]
             save("state.json", state)
         except Exception as e:
             errors.append(f"#{i} {post['product']}: {e}")
