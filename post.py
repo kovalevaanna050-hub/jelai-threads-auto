@@ -1,6 +1,6 @@
 """Автовыкладка JELAI в Threads: фото товара + подпись, в ветке ответ с артикулами.
 
-Запуск: python post.py morning|evening [--dry-run] [--no-wait] [--count N]
+Запуск: python post.py morning|midday|evening [--dry-run] [--no-wait] [--count N]
 Секреты (env): THREADS_TOKEN, TG_BOT_TOKEN, TG_CHAT_ID
 
 Правила:
@@ -21,7 +21,7 @@ import urllib.request
 
 API = "https://graph.threads.net/v1.0"
 TZ = dt.timezone(dt.timedelta(hours=7))  # Asia/Saigon
-START = {"morning": (8, 0), "evening": (19, 0)}
+START = {"morning": (8, 0), "midday": (13, 30), "evening": (19, 0)}
 GAP_MIN = 5          # минут между постами
 PHOTO_COOLDOWN_H = 72  # одно фото не чаще раза в 3 дня (если хватает фото)
 
@@ -253,7 +253,7 @@ def main():
 
     if DRY:
         return
-    title = "Утро" if slot == "morning" else "Вечер"
+    title = {"morning": "Утро", "midday": "День", "evening": "Вечер"}.get(slot, slot)
     msg = f"✅ {title} {today:%d.%m}: опубликовано {len(links)}/{len(posts)}\nНаличие: {source}\n\n" + "\n".join(links)
     if skipped:
         msg += "\n\nНе публикуются (нет в наличии): " + ", ".join(skipped)
