@@ -1,0 +1,18 @@
+name: Debug insights check
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check
+        env:
+          THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
+        run: |
+          echo "== me/threads (latest 3) =="
+          curl -s "https://graph.threads.net/v1.0/me/threads?fields=id,permalink,timestamp&limit=3&access_token=$THREADS_TOKEN" | jq .
+          ID=$(curl -s "https://graph.threads.net/v1.0/me/threads?fields=id&limit=1&access_token=$THREADS_TOKEN" | jq -r '.data[0].id')
+          echo "== insights for $ID =="
+          curl -s "https://graph.threads.net/v1.0/$ID/insights?metric=views&access_token=$THREADS_TOKEN" | jq .
