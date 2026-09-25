@@ -7,7 +7,13 @@
 - публикуются только товары в наличии (stock.json + попытка живой проверки WB);
 - в ответе только те площадки, где товар есть;
 - в одном слоте товар не повторяется; фото берутся самые давно не использованные;
-- подписи для товара идут по кругу.
+- подписи бывают двух стилей — "soft" и "edgy" (с матом); какой стиль выбрать
+  для товара, решает choose_caption() по факту просмотров (style_stats в
+  state.json, который считает report.py) — эпсилон-жадный выбор: в основном
+  берём стиль, который в среднем набирает больше просмотров, но в ~25% случаев
+  всё равно пробуем другой, чтобы не застрять на случайной удаче;
+- часть постов выходит без фото (только текст) — эксперимент с форматом,
+  доля задаётся FORMAT_TEXT_PROB.
 """
 import datetime as dt
 import json
@@ -24,6 +30,9 @@ TZ = dt.timezone(dt.timedelta(hours=7))  # Asia/Saigon
 START = {"morning": (8, 0), "midday": (13, 30), "evening": (19, 0)}
 GAP_MIN = 5          # минут между постами
 PHOTO_COOLDOWN_H = 72  # одно фото не чаще раза в 3 дня (если хватает фото)
+STYLE_EPSILON = 0.25   # доля исследования при выборе стиля подписи
+STYLE_MIN_POSTS = 3    # сколько постов должно накопиться по стилю, чтобы ему доверять
+FORMAT_TEXT_PROB = 0.15  # доля постов без фото (только текст) — пробуем формат
 
 ARGS = sys.argv[1:]
 DRY = "--dry-run" in ARGS
@@ -44,6 +53,14 @@ def load(name, default=None):
 def save(name, data):
     with open(name, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=1)
+
+
+def cap_text(c):
+    return c["text"] if isinstance(c, dict) else c
+
+
+def cap_style(c):
+    return c.get("style", "soft") if isinstance(c, dict) else "soft"
 
 
 # ---------- наличие ----------
@@ -120,6 +137,34 @@ def reply_text(cat, key, wb, oz):
     return "\n".join(lines)
 
 
+def choose_caption(cat, state, key):
+    """Возвращает (text, style). Эпсилон-жадный выбор стиля по style_stats
+    в state.json (считает report.py из просмотров вчерашних постов)."""
+    caps = cat["products"][key]["captions"] or [cat["products"][key]["name"]]
+    by_style = {}
+    for c in caps:
+        by_style.setdefault(cap_style(c), []).append(c)
+
+    stats = state.get("style_stats", {})
+    ready = {
+        s: stats.get(s, {}).get("posts", 0) >= STYLE_MIN_POSTS
+        for s in by_style
+    }
+    if len(by_style) > 1 and all(ready.values()):
+        avg = lambda s: stats[s]["views"] / max(stats[s]["posts"], 1)
+        best = max(by_style, key=avg)
+        if random.random() < STYLE_EPSILON:
+            others = [s for s in by_style if s != best]
+            style = random.choice(others) if others else best
+        else:
+            style = best
+    else:
+        style = random.choice(list(by_style))
+
+    chosen = random.choice(by_style[style])
+    return cap_text(chosen), style
+
+
 def pick(cat, state, wb, oz, n):
     t = now()
     ok = {k for k in cat["products"] if available(cat, k, wb, oz)}
@@ -139,9 +184,14 @@ def pick(cat, state, wb, oz, n):
         # второе фото того же товара для карусели, если есть свежее
         if len(photos) > 1 and fresh(photos[1]) and random.random() < 0.5:
             chosen.append(photos[1])
-        caps = cat["products"][k]["captions"] or [cat["products"][k]["name"]]
-        ci = state["caption_idx"].get(k, 0) % len(caps)
-        posts.append({"product": k, "photos": chosen, "text": caps[ci], "reply": reply_text(cat, k, wb, oz), "ci": ci})
+        text, style = choose_caption(cat, state, k)
+        fmt = "carousel" if len(chosen) > 1 else "photo"
+        if random.random() < FORMAT_TEXT_PROB:
+            chosen, fmt = [], "text"
+        posts.append({
+            "product": k, "photos": chosen, "text": text, "style": style, "format": fmt,
+            "reply": reply_text(cat, k, wb, oz),
+        })
     return posts, sorted(set(cat["products"]) - ok)
 
 
@@ -181,7 +231,9 @@ def publish(cid):
 
 def post_one(post, photo_url):
     urls = [photo_url(ph["file"]) for ph in post["photos"]]
-    if len(urls) == 1:
+    if not urls:
+        cid = call("POST", "me/threads", media_type="TEXT", text=post["text"])["id"]
+    elif len(urls) == 1:
         cid = call("POST", "me/threads", media_type="IMAGE", image_url=urls[0], text=post["text"])["id"]
     else:
         kids = [call("POST", "me/threads", media_type="IMAGE", image_url=u, is_carousel_item="true")["id"] for u in urls]
@@ -210,7 +262,8 @@ def telegram(text):
 
 def main():
     slot = ARGS[0] if ARGS and not ARGS[0].startswith("--") else "morning"
-    cat, state = load("catalog.json"), load("state.json", {"photo_last": {}, "caption_idx": {}, "product_last": {}})
+    cat = load("catalog.json")
+    state = load("state.json", {"photo_last": {}, "product_last": {}})
     wb, oz, source = stock_status()
     posts, skipped = pick(cat, state, wb, oz, COUNT)
     repo = os.environ.get("GITHUB_REPOSITORY", "OWNER/REPO")
@@ -224,7 +277,7 @@ def main():
     links, errors = [], []
     for i, post in enumerate(posts, 1):
         if DRY:
-            print(f"\n[dry] #{i} {post['product']} {[p['id'] for p in post['photos']]}\n  {post['text']}\n  ↳ {post['reply'].replace(chr(10), ' | ')}")
+            print(f"\n[dry] #{i} {post['product']} [{post['style']}/{post['format']}] {[p['id'] for p in post['photos']]}\n  {post['text']}\n  ↳ {post['reply'].replace(chr(10), ' | ')}")
             continue
         target = base + dt.timedelta(minutes=GAP_MIN * (i - 1))
         delay = (target - now()).total_seconds()
@@ -238,10 +291,10 @@ def main():
             for ph in post["photos"]:
                 state["photo_last"][ph["id"]] = stamp
             state["product_last"][post["product"]] = stamp
-            state["caption_idx"][post["product"]] = post["ci"] + 1
             state.setdefault("recent_posts", []).append({
                 "ts": stamp, "media_id": media_id, "product": post["product"],
                 "photos": [ph["file"] for ph in post["photos"]], "text": post["text"],
+                "style": post["style"], "format": post["format"],
                 "permalink": permalink, "is_boost": False,
             })
             keep_after = now() - dt.timedelta(hours=72)
