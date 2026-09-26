@@ -188,5 +188,14 @@
    "boost_of_views": 1
   }
  ],
- "style_stats": {}
+ "style_stats": {
+  "soft": {
+   "views": 6,
+   "posts": 9
+  },
+  "edgy": {
+   "views": 0,
+   "posts": 1
+  }
+ }
 }
