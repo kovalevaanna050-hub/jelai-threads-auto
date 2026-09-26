@@ -24,7 +24,19 @@
   "P053": "2026-09-25T19:35:35+07:00",
   "P054": "2026-09-25T19:40:34+07:00",
   "P044": "2026-09-25T19:45:39+07:00",
-  "P043": "2026-09-25T19:45:39+07:00"
+  "P043": "2026-09-25T19:45:39+07:00",
+  "P089": "2026-09-26T13:30:26+07:00",
+  "P045": "2026-09-26T13:35:28+07:00",
+  "P091": "2026-09-26T13:45:29+07:00",
+  "P092": "2026-09-26T13:55:43+07:00",
+  "P093": "2026-09-26T13:55:43+07:00",
+  "P066": "2026-09-26T14:00:43+07:00",
+  "P069": "2026-09-26T14:00:43+07:00",
+  "P087": "2026-09-26T14:05:37+07:00",
+  "P086": "2026-09-26T14:05:37+07:00",
+  "P090": "2026-09-26T14:10:31+07:00",
+  "P059": "2026-09-26T14:15:53+07:00",
+  "P060": "2026-09-26T14:15:53+07:00"
  },
  "caption_idx": {
   "gel_malina": 1,
@@ -49,9 +61,9 @@
   "cond_soap": 1
  },
  "product_last": {
-  "gel_malina": "2026-09-25T00:28:06+07:00",
+  "gel_malina": "2026-09-26T14:10:31+07:00",
   "mist_matcha": "2026-09-25T08:00:28+07:00",
-  "mist_cherry": "2026-09-25T08:05:33+07:00",
+  "mist_cherry": "2026-09-26T14:15:53+07:00",
   "cond_flowers": "2026-09-25T08:10:23+07:00",
   "mist_icelatte": "2026-09-25T08:15:31+07:00",
   "cond_blanche": "2026-09-25T08:20:32+07:00",
@@ -68,7 +80,14 @@
   "mist_popcorn": "2026-09-25T19:30:32+07:00",
   "mist_blanche": "2026-09-25T19:35:35+07:00",
   "mist_blueberry": "2026-09-25T19:40:34+07:00",
-  "cond_soap": "2026-09-25T19:45:39+07:00"
+  "cond_soap": "2026-09-25T19:45:39+07:00",
+  "gel_blanche": "2026-09-26T13:30:26+07:00",
+  "deo": "2026-09-26T13:35:28+07:00",
+  "mist_malina": "2026-09-26T13:40:30+07:00",
+  "gel_coco_cream": "2026-09-26T13:45:29+07:00",
+  "gel_cherry_eclipse": "2026-09-26T13:55:43+07:00",
+  "mist_fire": "2026-09-26T14:00:43+07:00",
+  "serum_pdrn": "2026-09-26T14:05:37+07:00"
  },
  "recent_posts": [
   {
@@ -212,6 +231,125 @@
    "permalink": "https://www.threads.com/@jelai.anna/post/DdvPlY1G5qL",
    "is_boost": true,
    "boost_of_views": 1
+  },
+  {
+   "ts": "2026-09-26T13:30:26+07:00",
+   "media_id": "18118863370953691",
+   "product": "gel_blanche",
+   "photos": [
+    "photos/P089_gel_blanche.jpg"
+   ],
+   "text": "Теперь я не выхожу из душа, пахну свежим бельём 🤍🪶",
+   "style": "soft",
+   "format": "photo",
+   "permalink": "https://www.threads.com/@jelai.anna/post/DdvZPllG3RK",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-26T13:35:28+07:00",
+   "media_id": "17977548897128739",
+   "product": "deo",
+   "photos": [
+    "photos/P045_deo.jpg"
+   ],
+   "text": "Я БОЛЬШЕ НЕ ВОНЯЮ\nТеперь я невероятно пахну ароматом зеленого чая и бергамота 🌿",
+   "style": "soft",
+   "format": "photo",
+   "permalink": "https://www.threads.com/@jelai.anna/post/DdvZ0RaG8_e",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-26T13:40:30+07:00",
+   "media_id": "17949517509274885",
+   "product": "mist_malina",
+   "photos": [],
+   "text": "ТРЕДС, пахну как фрамбини, и мне не стыдно 🍓",
+   "style": "soft",
+   "format": "text",
+   "permalink": "https://www.threads.com/@jelai.anna/post/DdvaYxaFYKf",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-26T13:45:29+07:00",
+   "media_id": "17922298440426556",
+   "product": "gel_coco_cream",
+   "photos": [
+    "photos/P091_gel_coco_cream.jpg"
+   ],
+   "text": "Блять, я теперь мою тело рафаэлло, и не собираюсь останавливаться 🥥",
+   "style": "edgy",
+   "format": "photo",
+   "permalink": "https://www.threads.com/@jelai.anna/post/Ddva9enG3pI",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-26T13:55:43+07:00",
+   "media_id": "18632478685004976",
+   "product": "gel_cherry_eclipse",
+   "photos": [
+    "photos/P092_gel_cherry_eclipse.jpg",
+    "photos/P093_gel_cherry_eclipse.jpg"
+   ],
+   "text": "ТРЕДС, в душе теперь пахнет вишней и холодком, и это, пиздец, огонь просто 😭❄️",
+   "style": "edgy",
+   "format": "carousel",
+   "permalink": "https://www.threads.com/@jelai.anna/post/DdvcIWlmyms",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-26T14:00:43+07:00",
+   "media_id": "17897737449607051",
+   "product": "mist_fire",
+   "photos": [
+    "photos/P066_mist_fire.jpg",
+    "photos/P069_mist_fire.jpg"
+   ],
+   "text": "Мист с ароматом костра и жжёного сахара 🔥🍬",
+   "style": "soft",
+   "format": "carousel",
+   "permalink": "https://www.threads.com/@jelai.anna/post/Ddvcs6dmyo-",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-26T14:05:37+07:00",
+   "media_id": "18038125337835931",
+   "product": "serum_pdrn",
+   "photos": [
+    "photos/P087_serum_pdrn.jpg",
+    "photos/P086_serum_pdrn.jpg"
+   ],
+   "text": "ТРЕДС, пользуюсь две недели, и кожа выглядит отдохнувшей 🤍",
+   "style": "soft",
+   "format": "carousel",
+   "permalink": "https://www.threads.com/@jelai.anna/post/DdvdRYmFcZk",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-26T14:10:31+07:00",
+   "media_id": "18070696817761764",
+   "product": "gel_malina",
+   "photos": [
+    "photos/P090_gel_malina.jpg"
+   ],
+   "text": "Мой вечерний душ стал самой вкусной частью дня 🍓🛁",
+   "style": "soft",
+   "format": "photo",
+   "permalink": "https://www.threads.com/@jelai.anna/post/Ddvd0lLm74P",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-26T14:15:53+07:00",
+   "media_id": "18127754959827495",
+   "product": "mist_cherry",
+   "photos": [
+    "photos/P059_mist_cherry.jpg",
+    "photos/P060_mist_cherry.jpg"
+   ],
+   "text": "У меня в коллекции под 300 парфюмов, но комплименты собирает вот этот мист, блять, серьёзно 🍒",
+   "style": "edgy",
+   "format": "carousel",
+   "permalink": "https://www.threads.com/@jelai.anna/post/DdvecFTlX5N",
+   "is_boost": false
   }
  ],
  "style_stats": {
