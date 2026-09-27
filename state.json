@@ -2,7 +2,7 @@
  "photo_last": {
   "P050": "2026-09-25T00:28:06+07:00",
   "P049": "2026-09-25T00:28:06+07:00",
-  "P078": "2026-09-25T08:00:28+07:00",
+  "P078": "2026-09-27T19:30:28+07:00",
   "P055": "2026-09-25T08:05:33+07:00",
   "P028": "2026-09-25T08:10:23+07:00",
   "P072": "2026-09-26T19:45:32+07:00",
@@ -15,8 +15,8 @@
   "P081": "2026-09-25T19:00:31+07:00",
   "P061": "2026-09-25T19:05:34+07:00",
   "P062": "2026-09-25T19:05:34+07:00",
-  "P009": "2026-09-25T19:10:30+07:00",
-  "P070": "2026-09-25T19:15:35+07:00",
+  "P009": "2026-09-27T19:40:35+07:00",
+  "P070": "2026-09-27T19:45:22+07:00",
   "P071": "2026-09-25T19:15:35+07:00",
   "P052": "2026-09-25T19:20:43+07:00",
   "P051": "2026-09-25T19:20:43+07:00",
@@ -47,7 +47,12 @@
   "P057": "2026-09-26T19:35:42+07:00",
   "P064": "2026-09-27T13:42:00+07:00",
   "P016": "2026-09-27T13:52:11+07:00",
-  "P018": "2026-09-27T13:52:11+07:00"
+  "P018": "2026-09-27T13:52:11+07:00",
+  "P030": "2026-09-27T19:05:38+07:00",
+  "P033": "2026-09-27T19:05:38+07:00",
+  "P058": "2026-09-27T19:10:29+07:00",
+  "P063": "2026-09-27T19:15:28+07:00",
+  "P074": "2026-09-27T19:20:42+07:00"
  },
  "caption_idx": {
   "gel_malina": 1,
@@ -73,8 +78,8 @@
  },
  "product_last": {
   "gel_malina": "2026-09-26T14:10:31+07:00",
-  "mist_matcha": "2026-09-25T08:00:28+07:00",
-  "mist_cherry": "2026-09-26T19:35:42+07:00",
+  "mist_matcha": "2026-09-27T19:30:28+07:00",
+  "mist_cherry": "2026-09-27T19:10:29+07:00",
   "cond_flowers": "2026-09-25T08:10:23+07:00",
   "mist_icelatte": "2026-09-26T19:45:32+07:00",
   "cond_blanche": "2026-09-27T13:52:11+07:00",
@@ -82,11 +87,11 @@
   "mist_coco": "2026-09-27T14:12:04+07:00",
   "mist_whitechoc": "2026-09-27T14:17:03+07:00",
   "mist_marshmallow": "2026-09-27T14:22:07+07:00",
-  "cond_lemon": "2026-09-25T08:45:35+07:00",
-  "mist_pistachio": "2026-09-25T19:00:31+07:00",
-  "mist_choco": "2026-09-27T13:42:00+07:00",
-  "cond_all": "2026-09-25T19:10:30+07:00",
-  "mist_forest": "2026-09-25T19:15:35+07:00",
+  "cond_lemon": "2026-09-27T19:05:38+07:00",
+  "mist_pistachio": "2026-09-27T19:35:25+07:00",
+  "mist_choco": "2026-09-27T19:15:28+07:00",
+  "cond_all": "2026-09-27T19:40:35+07:00",
+  "mist_forest": "2026-09-27T19:45:22+07:00",
   "gloss": "2026-09-25T19:20:43+07:00",
   "mist_popcorn": "2026-09-25T19:30:32+07:00",
   "mist_blanche": "2026-09-25T19:35:35+07:00",
@@ -94,7 +99,7 @@
   "cond_soap": "2026-09-25T19:45:39+07:00",
   "gel_blanche": "2026-09-26T13:30:26+07:00",
   "deo": "2026-09-26T13:35:28+07:00",
-  "mist_malina": "2026-09-27T13:47:01+07:00",
+  "mist_malina": "2026-09-27T19:20:42+07:00",
   "gel_coco_cream": "2026-09-26T19:25:31+07:00",
   "gel_cherry_eclipse": "2026-09-26T13:55:43+07:00",
   "mist_fire": "2026-09-26T19:30:39+07:00",
@@ -584,6 +589,109 @@
    "permalink": "https://www.threads.com/@jelai.anna/post/DdyWbeum8ip",
    "is_boost": true,
    "boost_of_views": 3
+  },
+  {
+   "ts": "2026-09-27T19:05:38+07:00",
+   "media_id": "18075114545448347",
+   "product": "cond_lemon",
+   "photos": [
+    "photos/P030_cond_lemon.jpg",
+    "photos/P033_cond_lemon.jpg"
+   ],
+   "text": "БЛЯТЬ, попробовала кондиционер с ароматом лимонного пирога — бельё пахнет неделю, и я не могу перестать нюхать шкаф 🍋",
+   "style": "edgy",
+   "format": "carousel",
+   "permalink": "https://www.threads.com/@jelai.anna/post/DdykZY2lc7X",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-27T19:10:29+07:00",
+   "media_id": "18633718876053285",
+   "product": "mist_cherry",
+   "photos": [
+    "photos/P058_mist_cherry.jpg"
+   ],
+   "text": "Самый освежающий мист в моей коллекции, аромат держится до вечера 🍒❄️",
+   "style": "soft",
+   "format": "photo",
+   "permalink": "https://www.threads.com/@jelai.anna/post/Ddyk8sVFaP4",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-27T19:15:28+07:00",
+   "media_id": "18367274599245144",
+   "product": "mist_choco",
+   "photos": [
+    "photos/P063_mist_choco.jpg"
+   ],
+   "text": "ТРЕДС, я нашла мист с ароматом киндера, блять, это лучшая находка за долгое время 🍫",
+   "style": "edgy",
+   "format": "photo",
+   "permalink": "https://www.threads.com/@jelai.anna/post/DdylhSElflb",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-27T19:20:42+07:00",
+   "media_id": "18137122675723218",
+   "product": "mist_malina",
+   "photos": [
+    "photos/P074_mist_malina.jpg"
+   ],
+   "text": "Малиновый десерт в флаконе, блять, и мне не стыдно признаться, что я его обнюхиваю 🍫",
+   "style": "edgy",
+   "format": "photo",
+   "permalink": "https://www.threads.com/@jelai.anna/post/DdymHj4FVDA",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-27T19:30:28+07:00",
+   "media_id": "18630086182008961",
+   "product": "mist_matcha",
+   "photos": [
+    "photos/P078_mist_matcha.jpg"
+   ],
+   "text": "Я фанатка матчи, и теперь у меня есть мист с её ароматом 🍵💚",
+   "style": "soft",
+   "format": "photo",
+   "permalink": "https://www.threads.com/@jelai.anna/post/DdynPKVlUBR",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-27T19:35:25+07:00",
+   "media_id": "17902953972587193",
+   "product": "mist_pistachio",
+   "photos": [],
+   "text": "Мист с ароматом фисташкового мороженого 🍦💚",
+   "style": "soft",
+   "format": "text",
+   "permalink": "https://www.threads.com/@jelai.anna/post/Ddynzt7FWRe",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-27T19:40:35+07:00",
+   "media_id": "18110684879125728",
+   "product": "cond_all",
+   "photos": [
+    "photos/P009_cond_all.jpg"
+   ],
+   "text": "Девочки, эта полка в ванной теперь пахнет лучше любой кондитерской 🧺✨",
+   "style": "soft",
+   "format": "photo",
+   "permalink": "https://www.threads.com/@jelai.anna/post/DdyoYczlWqc",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-27T19:45:22+07:00",
+   "media_id": "18095530091388855",
+   "product": "mist_forest",
+   "photos": [
+    "photos/P070_mist_forest.jpg"
+   ],
+   "text": "Стоило посмотреть сумерки, пришлось заказывать",
+   "style": "soft",
+   "format": "photo",
+   "permalink": "https://www.threads.com/@jelai.anna/post/Ddyo9C2lZEN",
+   "is_boost": false
   }
  ],
  "style_stats": {
