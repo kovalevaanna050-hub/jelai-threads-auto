@@ -1,16 +1,19 @@
 name: Post to Threads
 
+# Снижено с 3 до 1 раза в день 28.09 — за неделю резкого роста частоты (23->52
+# публикаций) официальная недельная сводка Threads показала падение просмотров
+# с 8228 до 317 (-96%), похоже на то, что Threads принял аккаунт за бота и
+# понизил охват. Возвращаемся к спокойному темпу, пока охват не восстановится.
+
 on:
   schedule:
-    - cron: "40 0 * * *"   # 07:40 по Сайгону → первый пост в 08:00
-    - cron: "10 6 * * *"   # 13:10 по Сайгону → первый пост в 13:30
     - cron: "40 11 * * *"  # 18:40 по Сайгону → первый пост в 19:00
   workflow_dispatch:
     inputs:
       slot:
         description: "morning, midday или evening"
         required: true
-        default: morning
+        default: evening
       dry_run:
         description: "Только проверка, без публикации"
         type: boolean
@@ -18,7 +21,7 @@ on:
       count:
         description: "Сколько постов"
         required: false
-        default: "10"
+        default: "5"
 
 concurrency:
   group: threads-post
@@ -38,7 +41,7 @@ jobs:
           THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID || vars.TG_CHAT_ID }}
-          POST_COUNT: ${{ vars.POST_COUNT || '10' }}
+          POST_COUNT: ${{ vars.POST_COUNT || '5' }}
         run: |
           if [ "${{ github.event_name }}" = "schedule" ]; then
             case "${{ github.event.schedule }}" in
