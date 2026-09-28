@@ -1,15 +1,15 @@
 {
  "photo_last": {
   "P050": "2026-09-28T08:05:31+07:00",
-  "P049": "2026-09-25T00:28:06+07:00",
+  "P049": "2026-09-28T19:15:31+07:00",
   "P078": "2026-09-27T19:30:28+07:00",
-  "P055": "2026-09-25T08:05:33+07:00",
+  "P055": "2026-09-28T19:10:30+07:00",
   "P028": "2026-09-25T08:10:23+07:00",
   "P072": "2026-09-26T19:45:32+07:00",
   "P011": "2026-09-25T08:20:32+07:00",
   "P076": "2026-09-27T14:07:04+07:00",
   "P065": "2026-09-27T14:12:04+07:00",
-  "P083": "2026-09-25T08:35:30+07:00",
+  "P083": "2026-09-28T19:05:32+07:00",
   "P077": "2026-09-27T14:22:07+07:00",
   "P029": "2026-09-25T08:45:35+07:00",
   "P081": "2026-09-25T19:00:31+07:00",
@@ -55,7 +55,8 @@
   "P074": "2026-09-27T19:20:42+07:00",
   "P034": "2026-09-28T08:15:38+07:00",
   "P036": "2026-09-28T08:15:38+07:00",
-  "P075": "2026-09-28T08:20:37+07:00"
+  "P075": "2026-09-28T08:20:37+07:00",
+  "P013": "2026-09-28T19:20:28+07:00"
  },
  "caption_idx": {
   "gel_malina": 1,
@@ -80,15 +81,15 @@
   "cond_soap": 1
  },
  "product_last": {
-  "gel_malina": "2026-09-28T08:05:31+07:00",
+  "gel_malina": "2026-09-28T19:15:31+07:00",
   "mist_matcha": "2026-09-27T19:30:28+07:00",
-  "mist_cherry": "2026-09-27T19:10:29+07:00",
+  "mist_cherry": "2026-09-28T19:10:30+07:00",
   "cond_flowers": "2026-09-25T08:10:23+07:00",
   "mist_icelatte": "2026-09-26T19:45:32+07:00",
-  "cond_blanche": "2026-09-28T08:10:27+07:00",
+  "cond_blanche": "2026-09-28T19:20:28+07:00",
   "mist_mango": "2026-09-27T14:07:04+07:00",
   "mist_coco": "2026-09-27T14:12:04+07:00",
-  "mist_whitechoc": "2026-09-27T14:17:03+07:00",
+  "mist_whitechoc": "2026-09-28T19:05:32+07:00",
   "mist_marshmallow": "2026-09-27T14:22:07+07:00",
   "cond_lemon": "2026-09-28T08:15:38+07:00",
   "mist_pistachio": "2026-09-27T19:35:25+07:00",
@@ -110,52 +111,6 @@
   "mist_oreo": "2026-09-26T19:00:46+07:00"
  },
  "recent_posts": [
-  {
-   "ts": "2026-09-25T19:00:31+07:00",
-   "media_id": "18068150525758577",
-   "product": "mist_pistachio",
-   "photos": [
-    "photos/P081_mist_pistachio.jpg"
-   ],
-   "text": "Мист с ароматом фисташкового мороженого 🍦💚",
-   "permalink": "https://www.threads.com/@jelai.anna/post/DdtaNyBEUKh",
-   "is_boost": false
-  },
-  {
-   "ts": "2026-09-25T19:05:34+07:00",
-   "media_id": "17903784189574292",
-   "product": "mist_choco",
-   "photos": [
-    "photos/P061_mist_choco.jpg",
-    "photos/P062_mist_choco.jpg"
-   ],
-   "text": "ТРЕДС, я нашла мист с ароматом киндера 🍫",
-   "permalink": "https://www.threads.com/@jelai.anna/post/DdtazctkWYN",
-   "is_boost": false
-  },
-  {
-   "ts": "2026-09-25T19:10:30+07:00",
-   "media_id": "18128983204751663",
-   "product": "cond_all",
-   "photos": [
-    "photos/P009_cond_all.jpg"
-   ],
-   "text": "ТРЕДС, самые вкусные кондиционеры для белья, которые я находила 🧺",
-   "permalink": "https://www.threads.com/@jelai.anna/post/DdtbXAHEaHc",
-   "is_boost": false
-  },
-  {
-   "ts": "2026-09-25T19:15:35+07:00",
-   "media_id": "18003343184793362",
-   "product": "mist_forest",
-   "photos": [
-    "photos/P070_mist_forest.jpg",
-    "photos/P071_mist_forest.jpg"
-   ],
-   "text": "Мист с запахом леса после дождя 🌲",
-   "permalink": "https://www.threads.com/@jelai.anna/post/Ddtb8kekQiP",
-   "is_boost": false
-  },
   {
    "ts": "2026-09-25T19:20:43+07:00",
    "media_id": "17921154213431065",
@@ -837,6 +792,58 @@
    "permalink": "https://www.threads.com/@jelai.anna/post/Dd0IZmMG_Lr",
    "is_boost": true,
    "boost_of_views": 2
+  },
+  {
+   "ts": "2026-09-28T19:05:32+07:00",
+   "media_id": "17870040618646351",
+   "product": "mist_whitechoc",
+   "photos": [
+    "photos/P083_mist_whitechoc.jpg"
+   ],
+   "text": "ТРЕДС, пахну как плитка белого шоколада 🤍",
+   "style": "soft",
+   "format": "photo",
+   "permalink": "https://www.threads.com/@jelai.anna/post/Dd1JK9WlolB",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-28T19:10:30+07:00",
+   "media_id": "18560853094078357",
+   "product": "mist_cherry",
+   "photos": [
+    "photos/P055_mist_cherry.jpg"
+   ],
+   "text": "ТРЕДС, я нашла мист с ароматом жвачки Eclipse с вишней 🍒❄️",
+   "style": "soft",
+   "format": "photo",
+   "permalink": "https://www.threads.com/@jelai.anna/post/Dd1JvmZlni4",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-28T19:15:31+07:00",
+   "media_id": "17885870745492667",
+   "product": "gel_malina",
+   "photos": [
+    "photos/P049_gel_malina.jpg"
+   ],
+   "text": "Я теперь моюсь малиной в шоколаде 🍓🍫",
+   "style": "soft",
+   "format": "photo",
+   "permalink": "https://www.threads.com/@jelai.anna/post/Dd1KUNZlulb",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-28T19:20:28+07:00",
+   "media_id": "18266438830306568",
+   "product": "cond_blanche",
+   "photos": [
+    "photos/P013_cond_blanche.jpg"
+   ],
+   "text": "Бельё пахнет как нишевый парфюм, а стоит как обычный кондиционер 🤍",
+   "style": "soft",
+   "format": "photo",
+   "permalink": "https://www.threads.com/@jelai.anna/post/Dd1K40ZFmjO",
+   "is_boost": false
   }
  ],
  "style_stats": {
