@@ -1,6 +1,6 @@
 {
  "photo_last": {
-  "P050": "2026-09-25T00:28:06+07:00",
+  "P050": "2026-09-28T08:05:31+07:00",
   "P049": "2026-09-25T00:28:06+07:00",
   "P078": "2026-09-27T19:30:28+07:00",
   "P055": "2026-09-25T08:05:33+07:00",
@@ -18,12 +18,12 @@
   "P009": "2026-09-27T19:40:35+07:00",
   "P070": "2026-09-27T19:45:22+07:00",
   "P071": "2026-09-25T19:15:35+07:00",
-  "P052": "2026-09-25T19:20:43+07:00",
+  "P052": "2026-09-28T08:25:31+07:00",
   "P051": "2026-09-25T19:20:43+07:00",
-  "P082": "2026-09-25T19:30:32+07:00",
+  "P082": "2026-09-28T08:30:29+07:00",
   "P053": "2026-09-25T19:35:35+07:00",
-  "P054": "2026-09-25T19:40:34+07:00",
-  "P044": "2026-09-25T19:45:39+07:00",
+  "P054": "2026-09-28T08:40:32+07:00",
+  "P044": "2026-09-28T08:45:33+07:00",
   "P043": "2026-09-25T19:45:39+07:00",
   "P089": "2026-09-26T13:30:26+07:00",
   "P045": "2026-09-26T13:35:28+07:00",
@@ -52,7 +52,10 @@
   "P033": "2026-09-27T19:05:38+07:00",
   "P058": "2026-09-27T19:10:29+07:00",
   "P063": "2026-09-27T19:15:28+07:00",
-  "P074": "2026-09-27T19:20:42+07:00"
+  "P074": "2026-09-27T19:20:42+07:00",
+  "P034": "2026-09-28T08:15:38+07:00",
+  "P036": "2026-09-28T08:15:38+07:00",
+  "P075": "2026-09-28T08:20:37+07:00"
  },
  "caption_idx": {
   "gel_malina": 1,
@@ -77,29 +80,29 @@
   "cond_soap": 1
  },
  "product_last": {
-  "gel_malina": "2026-09-26T14:10:31+07:00",
+  "gel_malina": "2026-09-28T08:05:31+07:00",
   "mist_matcha": "2026-09-27T19:30:28+07:00",
   "mist_cherry": "2026-09-27T19:10:29+07:00",
   "cond_flowers": "2026-09-25T08:10:23+07:00",
   "mist_icelatte": "2026-09-26T19:45:32+07:00",
-  "cond_blanche": "2026-09-27T13:52:11+07:00",
+  "cond_blanche": "2026-09-28T08:10:27+07:00",
   "mist_mango": "2026-09-27T14:07:04+07:00",
   "mist_coco": "2026-09-27T14:12:04+07:00",
   "mist_whitechoc": "2026-09-27T14:17:03+07:00",
   "mist_marshmallow": "2026-09-27T14:22:07+07:00",
-  "cond_lemon": "2026-09-27T19:05:38+07:00",
+  "cond_lemon": "2026-09-28T08:15:38+07:00",
   "mist_pistachio": "2026-09-27T19:35:25+07:00",
   "mist_choco": "2026-09-27T19:15:28+07:00",
   "cond_all": "2026-09-27T19:40:35+07:00",
   "mist_forest": "2026-09-27T19:45:22+07:00",
-  "gloss": "2026-09-25T19:20:43+07:00",
-  "mist_popcorn": "2026-09-25T19:30:32+07:00",
-  "mist_blanche": "2026-09-25T19:35:35+07:00",
-  "mist_blueberry": "2026-09-25T19:40:34+07:00",
-  "cond_soap": "2026-09-25T19:45:39+07:00",
+  "gloss": "2026-09-28T08:25:31+07:00",
+  "mist_popcorn": "2026-09-28T08:30:29+07:00",
+  "mist_blanche": "2026-09-28T08:35:21+07:00",
+  "mist_blueberry": "2026-09-28T08:40:32+07:00",
+  "cond_soap": "2026-09-28T08:45:33+07:00",
   "gel_blanche": "2026-09-26T13:30:26+07:00",
   "deo": "2026-09-26T13:35:28+07:00",
-  "mist_malina": "2026-09-27T19:20:42+07:00",
+  "mist_malina": "2026-09-28T08:20:37+07:00",
   "gel_coco_cream": "2026-09-26T19:25:31+07:00",
   "gel_cherry_eclipse": "2026-09-26T13:55:43+07:00",
   "mist_fire": "2026-09-26T19:30:39+07:00",
@@ -706,6 +709,120 @@
    "permalink": "https://www.threads.com/@jelai.anna/post/DdyzLP4kU9A",
    "is_boost": true,
    "boost_of_views": 2
+  },
+  {
+   "ts": "2026-09-28T08:05:31+07:00",
+   "media_id": "18107600302903545",
+   "product": "gel_malina",
+   "photos": [
+    "photos/P050_gel_malina.jpg"
+   ],
+   "text": "Ещё один продукт, который я купила из-за Тредс… и не пожалела ни капли, аромат просто ахуенный 🍫",
+   "style": "edgy",
+   "format": "photo",
+   "permalink": "https://www.threads.com/@jelai.anna/post/Ddz9o9vHLNS",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-28T08:10:27+07:00",
+   "media_id": "18491884378105737",
+   "product": "cond_blanche",
+   "photos": [],
+   "text": "А почему все молчат, что это буквально Byredo Blanche за копейки, блять?! 🥹",
+   "style": "edgy",
+   "format": "text",
+   "permalink": "https://www.threads.com/@jelai.anna/post/Ddz-NhMnM1z",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-28T08:15:38+07:00",
+   "media_id": "17911700841284568",
+   "product": "cond_lemon",
+   "photos": [
+    "photos/P034_cond_lemon.jpg",
+    "photos/P036_cond_lemon.jpg"
+   ],
+   "text": "БЛЯТЬ, закажите кондиционер для белья , стойкость вечная, пахнет нереально🥹🥹😭😭💔💔💔💔",
+   "style": "soft",
+   "format": "carousel",
+   "permalink": "https://www.threads.com/@jelai.anna/post/Ddz-zXfnFBg",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-28T08:20:37+07:00",
+   "media_id": "18111825251124056",
+   "product": "mist_malina",
+   "photos": [
+    "photos/P075_mist_malina.jpg"
+   ],
+   "text": "Мист с ароматом малины в шоколаде, от одежды пахнет неделю 🍓🍫",
+   "style": "soft",
+   "format": "photo",
+   "permalink": "https://www.threads.com/@jelai.anna/post/Ddz_W1enF_E",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-28T08:25:31+07:00",
+   "media_id": "17903010555569505",
+   "product": "gloss",
+   "photos": [
+    "photos/P052_gloss.jpg"
+   ],
+   "text": "Блять, нашла полный аналог блеска Kiko, в три раза дешевле — и это не реклама, я реально в шоке 💋",
+   "style": "edgy",
+   "format": "photo",
+   "permalink": "https://www.threads.com/@jelai.anna/post/Ddz_7eEnCXr",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-28T08:30:29+07:00",
+   "media_id": "17909108409311309",
+   "product": "mist_popcorn",
+   "photos": [
+    "photos/P082_mist_popcorn.jpg"
+   ],
+   "text": "Пахну карамельным попкорном из кинотеатра 🍿",
+   "style": "soft",
+   "format": "photo",
+   "permalink": "https://www.threads.com/@jelai.anna/post/Dd0AgEhHHXW",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-28T08:35:21+07:00",
+   "media_id": "18144324598576331",
+   "product": "mist_blanche",
+   "photos": [],
+   "text": "ТРЕДС, мист для тех, кто любит запах чистоты 🤍",
+   "style": "soft",
+   "format": "text",
+   "permalink": "https://www.threads.com/@jelai.anna/post/Dd0BEmcHDGX",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-28T08:40:32+07:00",
+   "media_id": "18093510257658634",
+   "product": "mist_blueberry",
+   "photos": [
+    "photos/P054_mist_blueberry.jpg"
+   ],
+   "text": "Мист с ароматом черничного пирога 🫐🥧",
+   "style": "soft",
+   "format": "photo",
+   "permalink": "https://www.threads.com/@jelai.anna/post/Dd0BpVSnL46",
+   "is_boost": false
+  },
+  {
+   "ts": "2026-09-28T08:45:33+07:00",
+   "media_id": "18006556088990053",
+   "product": "cond_soap",
+   "photos": [
+    "photos/P044_cond_soap.jpg"
+   ],
+   "text": "Нахуй парфюм на бельё, если есть этот кондиционер — пахнет неделю и без него 🫧",
+   "style": "edgy",
+   "format": "photo",
+   "permalink": "https://www.threads.com/@jelai.anna/post/Dd0CN9RnJPo",
+   "is_boost": false
   }
  ],
  "style_stats": {
